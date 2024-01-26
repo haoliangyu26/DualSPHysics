@@ -16,9 +16,11 @@ export diroutdata=${dirout}/data
 
 export dirbin=../../../bin/linux
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${dirbin}
+export dirbindsnn=${dirbin}/DSNNewtonian
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${dirbin}
 export gencase="${dirbin}/GenCase_linux64"
-export dualsphysicscpu="${dirbin}/DualSPHysics5.0_NNewtonianCPU_linux64"
-export dualsphysicsgpu="${dirbin}/DualSPHysics5.0_NNewtonian_linux64"
+export dualsphysicscpu="${dirbindsnn}/DualSPHysics5.0_NNewtonianCPU_linux64"
+export dualsphysicsgpu="${dirbindsnn}/DualSPHysics5.0_NNewtonian_linux64"
 export boundaryvtk="${dirbin}/BoundaryVTK_linux64"
 export partvtk="${dirbin}/PartVTK_linux64"
 export partvtkout="${dirbin}/PartVTKOut_linux64"
@@ -65,8 +67,8 @@ ${partvtk} -dirin ${diroutdata} -savevtk ${dirout2}/PartFluid -onlytype:-all,flu
 if [ $? -ne 0 ] ; then fail; fi
 
 # Executes PartVTKOut to create VTK files with excluded particles.
-# ${partvtkout} -dirin ${diroutdata} -savevtk ${dirout2}/PartFluidOut -SaveResume ${dirout2}/_ResumeFluidOut
-# if [ $? -ne 0 ] ; then fail; fi
+${partvtkout} -dirin ${diroutdata} -savevtk ${dirout2}/PartFluidOut -SaveResume ${dirout2}/_ResumeFluidOut
+if [ $? -ne 0 ] ; then fail; fi
 
 # Executes IsoSurface to create VTK files with slices of surface.
 export dirout2=${dirout}/surface

@@ -71,17 +71,17 @@ ${partvtk} -dirin ${diroutdata} -savevtk ${dirout2}/PartBound -onlytype:-all,bou
 if [ $? -ne 0 ] ; then fail; fi
 
 # Executes PartVTKOut to create VTK files with excluded particles.
-# ${partvtkout} -dirin ${diroutdata} -savevtk ${dirout2}/PartFluidOut -SaveResume ${dirout2}/_ResumeFluidOut
-# if [ $? -ne 0 ] ; then fail; fi
+${partvtkout} -dirin ${diroutdata} -savevtk ${dirout2}/PartFluidOut -SaveResume ${dirout2}/_ResumeFluidOut
+if [ $? -ne 0 ] ; then fail; fi
 
 # Executes PartVTK to create CSV with energy values.
 ${partvtk} -dirin ${diroutdata} -saveenergy ${dirout}/Energy -last:90
 if [ $? -ne 0 ] ; then fail; fi
 
 # Executes TracerParts to create VTK files with trajectory of some fluid particles.
-# export dirout2=${dirout}/tracer
-# ${tracerparts} -dirin ${diroutdata} -savevtk ${dirout2}/BorderParts -onlytype:-all,+fluid -nearpartsdist:0.02 -nearpartsdef:pt=0.1:0:0.1,pt=0.15:0:0.15,pt=0.2:0:0.2,ptels[x=1:0:1,z=0:0.05:2],ptels[x=0:0.05:1,z=2:0:2] -tailsize:200
-# if [ $? -ne 0 ] ; then fail; fi
+export dirout2=${dirout}/tracer
+${tracerparts} -dirin ${diroutdata} -savevtk ${dirout2}/BorderParts -onlytype:-all,+fluid -nearpartsdist:0.02 -nearpartsdef:pt=0.1:0:0.1,pt=0.15:0:0.15,pt=0.2:0:0.2,ptels[x=1:0:1,z=0:0.05:2],ptels[x=0:0.05:1,z=2:0:2] -tailsize:200
+if [ $? -ne 0 ] ; then fail; fi
 
 # Executes MeasureTool to create VTK and CSV files with elevation at each simulation time.
 export dirout2=${dirout}/measuretool
