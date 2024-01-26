@@ -1,5 +1,9 @@
 ## Ignores all Visual Studio 2015 files except the basic one.
 src/VS/*
+bin
+examples/
+src/source/build/
+src/source/.vs/
 !src/VS/_ClearTempFiles.bat
 !src/VS/*.vcxproj
 !src/VS/*.vcxproj.user
